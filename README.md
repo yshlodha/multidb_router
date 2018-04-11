@@ -2,164 +2,189 @@
 
 *All the below instructions are done on Ubuntu Machine. If you are using different OS then please search the alterantive for performing below instructions.*
 
-#####Configure Your machine with PostgresSQL and MySQL
+##### Configure Your machine with PostgresSQL and MySQL
 
 - This is the link to install (Postgres)[https://www.postgresql.org/download/linux/ubuntu/]
+
 - This is the link to install (MySQL)[https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/]
 
 Don't forget to configure Postgres and MySQL with proper user permission.
 
-#####Create Database on both Postgres and MySQL
+##### Create Database on both Postgres and MySQL
+
 *In Terminal*
 
 * Postgres:
->sudo -i -u postgres
->psql
->CREATE DATABASE user_db
->CREATE DATABASE database1;
->CREATE DATABASE database2;
 
-if you are going to use different user to access this databases then run this comman where <username> will be the user which will going to access these databases:
+> sudo -i -u postgres
 
->grant all privileges on database database1 to <username>;
->grant all privileges on database database2 to <username>;
+> psql
+
+> CREATE DATABASE user_db;
+
+> CREATE DATABASE database1;
+
+> CREATE DATABASE database2;
+
+*if you are going to use different user to access this databases then run this comman where <username> will be the user which will going to access these databases:*
+
+> grant all privileges on database database1 to <username>;
+
+> grant all privileges on database database2 to <username>;
 
 exits from postgres.
 
 * MySQL
->mysql -u <user> -p
 
-this will prompt for password enter the valid password for user.
+> mysql -u <user> -p
+
+*this will prompt for password enter the valid password for user.*
 
 mysql console will open:
 
->CREATE DATABASE database3;
->CREATE DATABASE database4;
->CREATE DATABASE database5;
+> CREATE DATABASE database3;
+
+> CREATE DATABASE database4;
+
+> CREATE DATABASE database5;
 
 exits from MySQL.
 
 
-#####Virtualenv Configuration
+##### Virtualenv Configuration
 
-Install virtualenv by following instructions if already not exists in your machine: (Virtualenv) [https://virtualenv.pypa.io/en/stable/installation/]
+Install virtualenv by following instructions if already not exists in your machine: (Virtualenv)[https://virtualenv.pypa.io/en/stable/installation/]
 
 
 *In terminal*
->virtualenv -p python3.4 multidb_routerenv
 
->cd multidb_routerevn/
+> virtualenv -p python3.4 multidb_routerenv
 
->source bin/activate
+> cd multidb_routerevn/
+
+> source bin/activate
 
 
-####Clone app from github
+##### Clone app from github
 
->git clone https://github.com/yshlodha/multidb_router.git
+> git clone https://github.com/yshlodha/multidb_router.git
 
->cd multidb_router/
+> cd multidb_router/
 
->pip install -r requirements.txt
+> pip install -r requirements.txt
 
-#####Make Settings file according to Your Host Configuration
+##### Make Settings file according to Your Host Configuration
 
->cd multidb_router/
+> cd multidb_router/
 
->open settings.py and prod_settings.py
+> open settings.py and prod_settings.py
 
 Edit DATABASES settings For USER, PASSWORD, HOST, And PORT
 
->Modifiy this variable as per your database username and password and host and port your dbs running on.
+> Modifiy this variable as per your database username and password and host and port your dbs running on.
 
 NOW Edit following settings as per your email backends and smtp server:
  
->EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
->EMAIL_USE_TLS = True
->EMAIL_HOST = 'smtp.sendgrid.net'
->EMAIL_PORT = 587
->EMAIL_HOST_USER = ''
->EMAIL_HOST_PASSWORD = ''
+> EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
->DEFAULT_EMAIL_ADDRESS = ''
+> EMAIL_USE_TLS = True
+
+> EMAIL_HOST = 'smtp.sendgrid.net'
+
+> EMAIL_PORT = 587
+
+> EMAIL_HOST_USER = ''
+
+> EMAIL_HOST_PASSWORD = ''
+
+> DEFAULT_EMAIL_ADDRESS = ''
 
 Now Modifiy DOMAIN:
 
-for prod_settings.py:
+*for prod_settings.py:*
 
 > set it the the domain name and port production is pointed to.
 
 for local environment i.e. settings.py:
 
->you can keep as it on localhost:8000 or may change if you want to run it on some ip or on some domain.
+> you can keep as it on localhost:8000 or may change if you want to run it on some ip or on some domain.
 
+> cd ../
 
->cd ../
->ls
+> ls
+
 and see if mamange.py is in the directory if it is you are in correct directory.
 
-#####Run Migrations
->python manage.py migrate
->python manage.py migrate --database=db_1
->python manage.py migrate --database=db_2
->python manage.py migrate --database=db_3
->python manage.py migrate --database=db_4
->python manage.py migrate --database=db_5
+##### Run Migrations
 
-load some data fixtures:
->python manage.py loaddata mutlidb_router_app/fixtures/db_choices.json
+> python manage.py migrate
+
+> python manage.py migrate --database=db_1
+
+> python manage.py migrate --database=db_2
+
+> python manage.py migrate --database=db_3
+
+> python manage.py migrate --database=db_4
+
+> python manage.py migrate --database=db_5
+
+*load some data fixtures:*
+
+> python manage.py loaddata mutlidb_router_app/fixtures/db_choices.json
 
 
-#####Create Super user to perform the admin tasks.
+##### Create Super user to perform the admin tasks.
 
->python manage.py createsuperuser
+> python manage.py createsuperuser
 
 this will prompt some input for admin user.
 
 
-#####Run server
+##### Run server
 
-For local Envirnonment:
+*For local Envirnonment:*
 
->python manage.py runserver --settings=mutlidb_router.settings
+> python manage.py runserver --settings=mutlidb_router.settings
 
-for Production Environment:
+*for Production Environment:*
 
->python manage.py runserver --settings=multidb_router.prod_settings
+> python manage.py runserver --settings=multidb_router.prod_settings
 
 
-#####Perform User Creation by Admin
+##### Perform User Creation by Admin
 
 go to localhost:8000/admin or whatever domain you are running your server with "/admin"
 
--login page opens
+- login page opens
 
--Enter your superuser credentials for login.
+- Enter your superuser credentials for login.
 
--You will See two options Groups and User.
+- You will See two options Groups and User.
 
--with User you will '+' Add button.
+- with User you will '+' Add button.
 
--click the add button a user creation page opens.
+- click the add button a user creation page opens.
 
--fill the fields to create user in the bottom of this you will see the list of databases.
+- fill the fields to create user in the bottom of this you will see the list of databases.
 
--Select the databases you want to give access to the user you are creating.
+- Select the databases you want to give access to the user you are creating.
 
 - After this click the Save button at the bottom.
 
--once the User is save a email will sent on its email as per the email backend you are using.
+- once the User is save a email will sent on its email as per the email backend you are using.
 
-#####After User receives Email
+##### After User receives Email
 
 - Email will contains the username and password with a link for login on site.
 
--this link will be "domain/app/login"
+- this link will be "domain/app/login"
 
--User will go on this link and enter its credentials received on email.
+- User will go on this link and enter its credentials received on email.
 
--After successfully logged in user will see home page.
+- After successfully logged in user will see home page.
 
--On home page user will finds 2 links
+- On home page user will finds 2 links
 
 >  1. See Your Product List HERE!!
 
@@ -169,11 +194,11 @@ go to localhost:8000/admin or whatever domain you are running your server with "
 
 - Second link is to add new product in selected database.
 
-####For Admin Page to see all User product.
+##### For Admin Page to see all User product.
 
 Go to "domain/app/login/"
 
--Enter the Admin credentials i.e. credentials of superuser.
+- Enter the Admin credentials i.e. credentials of superuser.
 
 - you will see admin page which will contains the list of users and the databases which contains the products with product name.
 
@@ -183,12 +208,11 @@ Go to "domain/app/login/"
 
 - And beside every product in details column : "click Here!!"
 
--When admin clicks to add new product he will redirected to new page to add new product on that user.
+- When admin clicks to add new product he will redirected to new page to add new product on that user.
 
--When admin click on details on "click Here" he will redirected to details page will contain product name, db in which product is kept and category where it belongs. After from this this page also contains a 'delete' button by click on delete button that product will get delted from the database it is kept. and redirect backs to the admin all user list page. 
+- When admin click on details on "click Here" he will redirected to details page will contain product name, db in which product is kept and category where it belongs. After from this this page also contains a 'delete' button by click on delete button that product will get delted from the database it is kept. and redirect backs to the admin all user list page. 
 
 
+##### TEST CASES.
 
-#####TEST CASES.
-
-I will Update it SOON...
+I will Update it SOON.
