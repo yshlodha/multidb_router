@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App Admin Page</title>
+</head>
+<body>
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><center>Product  List!!</center></h3>
+                    <center>
+                   </center>
+                </div>
+                <div class="panel-body">
+
+                            <center>
+                               {% for obj in all_products %}
+                                   {% for user, products in obj.items %}
+                               <table cellpadding="4" cellspacing="8" border="1">
+                                   <tr><th>{{user}}</th><th><a href="{% url 'admin-add-user-product' username=user %}"> click Here to add New product!!  </a></th></tr>
+                                <tr>
+                                    <th>databases</th>
+                                    <th>product name</th>
+                                    <th>details</th>
+                                </tr>
+
+                                {% for db in products %}
+                                    {% for name, item in db.items %}
+                                       {% for value in item %}
+                                        <tr>
+                                            <td>{{name}}</td>
+                                            <td>{{value.name}}</td>
+                                            <td><a href="{% url 'admin-user-product' username=user %}?product_id={{value.id}}&name={{value.name}}&db={{name}}&category={{value.category}}&"> click Here!!  </a></td>
+                                        </tr>
+                                   {% endfor %}
+                                   {% endfor %}
+                                {% endfor %}
+                                </table><br>
+                                {% endfor %}
+                                {% endfor %}
+                          </center>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if not user.is_authenticated %}
+$("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+</script>
+
+{% endblock %}
+
+
+</body>
+</html>

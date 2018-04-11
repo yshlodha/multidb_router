@@ -1,0 +1,32 @@
+[
+ {
+    "model": "multidb_router_app.database",
+    "pk": 1,
+    "fields": {
+      "name": "db_1"}
+  },
+  {
+    "model": "multidb_router_app.database",
+    "pk": 2,
+    "fields": {
+      "name": "db_2"}
+  },
+  {
+    "model": "multidb_router_app.database",
+    "pk": 3,
+    "fields": {
+      "name": "db_3"}
+  },
+  {
+    "model": "multidb_router_app.database",
+    "pk": 4,
+    "fields": {
+      "name": "db_4"}
+  },
+  {
+    "model": "multidb_router_app.database",
+    "pk": 5,
+    "fields": {
+      "name": "db_5"}
+  }
+]

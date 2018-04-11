@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+</head>
+<body>
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><center>Details </center></h3>
+                    <center>
+                        <table cellpadding="3" cellspacing="8" border="1">
+                                <tr>
+                                    <th>databases</th>
+                                    <th>product name</th>
+                                    <th>product category</th>
+
+                                </tr>
+
+                                        <tr>
+                                            <td>{{db}}</td>
+                                            <td>{{name}}</td>
+                                            <td>{{category}}</td>
+                                        </tr>
+
+                                </table>
+                   </center>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="{% url 'admin-user-product' username=username %}?db={{db}}&product_id={{product_id}}">
+{% csrf_token %}
+                        <center>
+                                <input class="btn btn-success btn-sm" type="submit" value="Delete Product" />
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if not user.is_authenticated %}
+$("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+</script>
+
+{% endblock %}
+
+</body>
+</html>
