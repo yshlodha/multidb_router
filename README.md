@@ -187,3 +187,8 @@ Go to "domain/app/login/"
 
 -When admin click on details on "click Here" he will redirected to details page will contain product name, db in which product is kept and category where it belongs. After from this this page also contains a 'delete' button by click on delete button that product will get delted from the database it is kept. and redirect backs to the admin all user list page. 
 
+
+
+#####TEST CASES.
+
+I will Update it SOON...
